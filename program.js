@@ -95,7 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
     ideas_media_popup.classList.add("active");
     const content = `
       <div>
+      <span><b>Mặt sau bằng tốt nghiệp</b></span>
         <img src="${IDEAS_DATA.degree[1]}" />
+        <span><b>Mặt trước bằng tốt nghiệp</b></span>
         <img src="${IDEAS_DATA.degree[0]}" />
       </div>       
     `;
