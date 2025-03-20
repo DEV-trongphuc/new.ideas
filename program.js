@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   const ideas_alert_title = document.querySelector(".ideas_alert h3");
+  const ideas_degree = document.querySelector(".ideas_degree");
+  ideas_degree.src = IDEAS_DATA.degree[0];
   const ideas_media_popup_title = document.querySelector(
     ".ideas_media_popup h3"
   );
@@ -92,12 +94,11 @@ document.addEventListener("DOMContentLoaded", () => {
   ideas_program_detail_info_lanhsu.addEventListener("click", () => {
     ideas_media_popup.classList.add("active");
     const content = `
-  <div>
-      <img src="https://ideas.edu.vn/wp-content/uploads/2024/10/Quan-Tang-Vi-Diploma-1_page-0002.jpg"/>
-      <img src="https://ideas.edu.vn/wp-content/uploads/2025/03/UMEF-EMBA-Degree-2025.png"/>
-
-    </div>       
-      `;
+      <div>
+        <img src="${IDEAS_DATA.degree[1]}" />
+        <img src="${IDEAS_DATA.degree[0]}" />
+      </div>       
+    `;
     renderMedia("Chứng nhận hợp pháp hoá lãnh sự", content);
   });
 
