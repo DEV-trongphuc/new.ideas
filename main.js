@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ideas_follow_2.href = IDEAS_DATA.youtube_link;
   ideas_follow_3.href = IDEAS_DATA.linkedin_link;
   ideas_follow_4.href = IDEAS_DATA.zalo_link;
-  const dom_alert_close = document.querySelector(".dom_alert_close");
+  const ideas_alert_close = document.querySelector(".ideas_alert_close");
   const ideas_alert = document.querySelector(".ideas_alert");
   const ideas_form_choose_list = document.querySelector(
     ".ideas_form_choose ul"
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ideas_form_choose.addEventListener("click", () => {
     ideas_form_choose.classList.toggle("active");
   });
-  dom_alert_close.addEventListener("click", () => {
+  ideas_alert_close.addEventListener("click", () => {
     ideas_alert.classList.remove("active");
   });
   ideas_form_close.addEventListener("click", () => {

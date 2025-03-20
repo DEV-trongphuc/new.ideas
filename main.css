@@ -9,13 +9,7 @@ textarea {
   background-color: transparent;
   outline: 0;
 }
-.dom_adsid,
-.dom_adsid > div,
-.dom_adsid > div > div,
-.dom_total_percent {
-  gap: 1rem;
-  display: flex;
-}
+
 body,
 html {
   overflow-x: hidden;
@@ -25,10 +19,6 @@ input[type="checkbox"]::before {
   transform: translate(-50%, -50%);
   left: 50%;
   position: absolute;
-}
-#dom_sidebar.zoom .dom_zoom > i,
-.dom_zoom {
-  rotate: 180deg;
 }
 
 *,
@@ -70,12 +60,12 @@ html {
 body {
   font-weight: 400;
   line-height: 1.8;
-  font-size: 1.7rem;
+
   font-family: "Exo 2", sans-serif;
   font-optical-sizing: auto;
   color: var(--textClr);
   background-color: #fdfdfd;
-
+  font-size: 1.6rem;
   overflow-y: auto;
 }
 
@@ -284,7 +274,7 @@ body {
   display: flex;
   gap: 3rem;
   max-width: 1600px;
-  border-radius: 8px;
+  border-radius: 5px;
   position: relative;
 }
 
@@ -413,10 +403,10 @@ body {
   gap: 1rem;
 }
 .ideas_imgs img {
-  width: calc(25% - 1rem);
+  width: calc(33.33%);
   border-radius: 8px;
   object-fit: cover;
-  min-height: 25rem;
+  box-shadow: 0 0 3px rgb(0, 0, 0, 0.2);
 }
 .ideas_line {
   width: 82%;
@@ -545,8 +535,14 @@ body {
   flex-wrap: wrap;
   gap: 2rem;
 }
+
+.ideas_follow_inner {
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+  margin-top: 3rem;
+}
 .ideas_follow {
-  margin-top: 2rem;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -554,10 +550,10 @@ body {
   border-radius: 50rem;
   border: 1px solid rgb(0, 0, 0, 0.2);
   width: max-content;
+  background-color: white;
 }
 .ideas_follow > p {
   font-weight: bold;
-  font-size: 2rem;
 }
 .ideas_follow a {
   display: flex;
@@ -588,8 +584,12 @@ body {
 .ideas_follow i img {
   width: 2.8rem;
 }
+.ideas_follow.group img {
+  width: 8rem;
+}
 .ideas_social_avatar_inner {
   display: flex;
+  align-items: center;
 }
 .ideas_social_avatar_inner > div {
   display: flex;
@@ -1022,7 +1022,8 @@ b {
   border: 5px solid #00000010;
 }
 .ideas_form,
-.ideas_alert {
+.ideas_alert,
+.ideas_media_popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -1040,7 +1041,8 @@ b {
   scale: 0;
   transition: 0.2s;
 }
-.ideas_alert {
+.ideas_alert,
+.ideas_media_popup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1049,7 +1051,25 @@ b {
   width: 95vw;
   max-width: 50rem;
 }
-.ideas_alert > a {
+.ideas_media_popup {
+  max-width: 80rem;
+}
+.ideas_media_popup > .ideas_media_content > div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 60vh;
+  overflow-y: auto;
+  gap: 2rem;
+  padding: 1rem;
+}
+.ideas_media_popup img {
+  box-shadow: 0 0 3px rgb(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 100%;
+  object-fit: cover;
+}
+.ideas_alert_close {
   width: 100%;
   text-align: center;
   font-weight: bold;
@@ -1059,23 +1079,23 @@ b {
   cursor: pointer;
   box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
 }
-.ideas_alert .dom_alert_content > i {
+.ideas_alert .ideas_alert_content > i {
   font-size: 4rem;
   color: green;
 }
-.ideas_alert .dom_alert_content > img {
+.ideas_alert .ideas_alert_content > img {
   width: 10rem;
 }
-.ideas_alert .dom_alert_content > ul {
+.ideas_alert .ideas_alert_content > ul {
   width: 100%;
   text-align: left;
   font-size: 1.5rem;
 }
-.ideas_alert .dom_alert_content > ul i {
+.ideas_alert .ideas_alert_content > ul i {
   color: var(--mainClr);
   margin-right: 5px;
 }
-.dom_alert_content {
+.ideas_alert_content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1086,18 +1106,24 @@ b {
   padding: 2rem;
   padding-top: 0;
 }
+.ideas_media_popup h3,
 .ideas_alert h3 {
   font-weight: bold;
   font-size: 2rem;
   color: var(--mainClr);
 }
 .ideas_form.active,
+.ideas_media_popup.active,
 .ideas_alert.active {
   opacity: 1;
   pointer-events: all;
   scale: 1;
 }
 .ideas_alert.active ~ .ideas_popup_overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+.ideas_media_popup.active ~ .ideas_popup_overlay {
   opacity: 1;
   pointer-events: all;
 }
@@ -1510,7 +1536,6 @@ b {
   color: var(--mainClr);
 }
 .ideas_course_title_left > div > span {
-  font-size: 1.4rem;
   font-weight: bold;
 }
 .ideas_course_title_left > div > p {
@@ -1523,15 +1548,14 @@ b {
   display: flex;
   width: 55%;
   flex-direction: column;
+  position: relative;
 }
-.ideas_course_title_left > img {
-  width: 40rem;
-  border-radius: 8px;
-  transition: 0.3s;
-  object-fit: cover;
-}
+
 .ideas_course_title_left > img:hover {
   filter: brightness(0.8);
+}
+.ideas_program_head_share {
+  opacity: 0.8;
 }
 .ideas_course_title_left > div > a img {
   width: 3rem;
@@ -1597,7 +1621,7 @@ b {
 
 .ideas_program_subject_item p:first-child {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1649,6 +1673,7 @@ b {
 .ideas_program_detail_img {
   display: flex;
   margin-top: 2rem;
+  align-items: flex-start;
   gap: 3rem;
 }
 .ideas_program_detail_info > p {
@@ -1656,13 +1681,25 @@ b {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
-.ideas_program_detail_info_lanhsu {
-  color: var(--mainClr);
+.ideas_program_detail_info a {
   cursor: pointer;
   font-weight: bold;
+  text-decoration: underline;
 }
-.ideas_program_detail_img img {
-  width: 35rem;
+.ideas_program_detail_info ul {
+  text-align: justify;
+}
+.wes_logo {
+  width: 20rem;
+  margin-bottom: 3rem;
+}
+.ideas_program_detail_img > img {
+  width: 40%;
+  box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+.ideas_program_detail_img.wes > img {
+  width: 50%;
   box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
   border-radius: 8px;
 }
@@ -1676,6 +1713,7 @@ b {
   display: flex;
   gap: 3rem;
   align-items: flex-start;
+  margin-top: -3rem;
 }
 .ideas_program_benefit {
   display: flex;
@@ -1760,6 +1798,7 @@ b {
   gap: 1rem;
   margin-top: 1rem;
   margin-left: -1.5rem;
+  mix-blend-mode: multiply;
 }
 .ideas_imgs_logo a {
   cursor: pointer;
@@ -1810,6 +1849,10 @@ b {
   color: var(--mainClr);
   text-decoration: underline;
   font-weight: bold;
+  cursor: pointer;
+}
+.text_download {
+  color: var(--mainClr);
   cursor: pointer;
 }
 .ideas_program_fee_head > img {
@@ -1923,4 +1966,17 @@ a.disable {
 }
 .ideas_program_head_support a img {
   width: 8rem;
+}
+.swiper-container {
+  width: 90vw;
+  max-width: 1600px;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+}
+.swiper-slide img {
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+  border-radius: 5px;
 }
