@@ -18,6 +18,11 @@
       href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   </head>
   <body>
     <header class="ideas_header">
@@ -32,6 +37,7 @@
         </ul>
       </div>
       <div class="ideas_header_menu">
+        <i class="fa-solid fa-bars"></i>
         <div class="ideas_logo">
           <img src="./ideas-02.png" />
         </div>
@@ -41,13 +47,26 @@
               <a><i class="fa-solid fa-house"></i> Giới thiệu </a>
               <ul>
                 <li>
-                  <a>Lịch sử hình thành</a>
+                  <a href="/dong-su-kien">Dòng sự kiện</a>
                 </li>
                 <li>
-                  <a>Dòng sự kiện</a>
+                  <a href="/doi-ngu-giang-vien">Đội ngũ giảng viên</a>
                 </li>
                 <li>
-                  <a>Đội ngũ giảng viên</a>
+                  <a href="/lich-su-hinh-thanh-va-phat-trien-vien-ideas"
+                    >Lịch sử hình thành</a
+                  >
+                </li>
+                <li>
+                  <a href="/tam-nhin-su-menh">Tầm nhìn sứ mệnh</a>
+                </li>
+                <li>
+                  <a href="/thong-diep-vien-truong">Thông điệp viện trưởng</a>
+                </li>
+                <li>
+                  <a href="/lien-hiep-cac-hoi-khoa-hoc-va-ky-thuat-tp-hcm"
+                    >Liên hiệp hội - Khoa học</a
+                  >
                 </li>
               </ul>
             </li>
@@ -140,7 +159,7 @@
       <div class="ideas_box space">
         <div class="w50">
           <img src="./ideas_paten.png" class="pattern" />
-          <h2><b class="main_clr">IDEAS</b> <b>Institute</b></h2>
+          <h1><b class="main_clr">IDEAS</b> <b>Institute</b></h1>
           <ul class="ideas_des">
             <li>
               <i class="fa-solid fa-graduation-cap"></i> Là đơn vị hỗ trợ giáo
@@ -183,7 +202,7 @@
             </div>
             <div class="ideas_follow group">
               <p>Community</p>
-              <a target="_blank">
+              <a target="_blank" href="https://chiefaiofficer.vn/">
                 <i>
                   <img
                     src="https://chiefaiofficer.vn/wp-content/uploads/2024/09/cao-logo.png"
@@ -281,13 +300,13 @@
                 </li>
               </ul>
               <div class="ideas_btns ideas_test_btn">
-                <a class="main_btn"
+                <a class="main_btn test_btn"
                   ><i class="fa-solid fa-play"></i>
                   <span>Kiểm tra mức độ phù hợp</span></a
                 >
-                <a class="main_btn sub">
-                  <i class="fa-solid fa-headset"></i>
-                  <span> Tư vấn chương trình phù hợp</span></a
+                <a class="main_btn sub" onclick="comparePopup()">
+                  <i class="fa-solid fa-clone"></i>
+                  <span> So sánh chương trình</span></a
                 >
               </div>
             </div>
@@ -448,8 +467,12 @@
           <div>
             <div class="ideas_faq_inner"></div>
             <div class="ideas_faq_add">
-              <img src="./AI.png" />
-              <a class="main_btn"
+              <img
+                src="https://ideas.edu.vn/wp-content/uploads/2025/03/AI_faq.png"
+              />
+              <a
+                class="main_btn"
+                onclick="showform('Gửi câu hỏi', 'Gửi câu hỏi của bạn đến Viện IDEAS')"
                 ><i class="fa-solid fa-circle-question"></i> GỬI CÂU HỎI</a
               >
               <h3>"Bạn có câu hỏi nào muốn gửi đến Viện IDEAS không?"</h3>
@@ -459,27 +482,26 @@
       </div>
       <div class="ideas_alert">
         <h3>Thành công</h3>
-        <div class="dom_alert_content">
+        <div class="ideas_alert_content">
           <i class="fa-solid fa-circle-check"></i>
           <span
             >Cảm ơn bạn đã quan tâm, tư vấn viên sẽ liên hệ cho bạn trong thời
             gian sớm nhất</span
           >
         </div>
-        <a class="dom_alert_close">Đóng</a>
+        <a class="ideas_alert_close">Đóng</a>
       </div>
-      <div class="ideas_form active">
+      <div class="ideas_form">
         <i class="fa-solid fa-xmark ideas_form_close"></i>
         <div class="ideas_form_header">
           <h2><i class="fa-solid fa-headset"></i> Đăng ký tư vấn</h2>
           <div class="ideas_form_choose">
-            <span> Executive MBA Online </span>
+            <span class="ideas_form_choose_text"> Executive MBA Online </span>
             <i class="fa-solid fa-sort-down"></i>
             <ul>
               <li>MBA Online</li>
-              <li>MBA Online</li>
-              <li>MBA Online</li>
-              <li>MBA Online</li>
+              <li>EMBA Online</li>
+              <li>Global MBA</li>
               <li>Tư vấn chung</li>
             </ul>
           </div>
@@ -509,8 +531,10 @@
           </label>
           <label>
             <span
-              ><i class="fa-solid fa-share-nodes"></i> Chia sẽ về tiếng Anh,
-              Kinh nghiệm và nhu cầu của bạn</span
+              ><i class="fa-solid fa-share-nodes"></i>
+              <span class="ideas_form_textarea">
+                Chia sẽ về tiếng Anh, Kinh nghiệm và nhu cầu của bạn
+              </span></span
             >
             <textarea></textarea>
           </label>
@@ -521,9 +545,68 @@
           >
         </form>
       </div>
+      <div class="compare" id="compare">
+        <i class="fa-solid fa-xmark compare_close"></i>
+        <p><i class="fa-solid fa-clone"></i> So sánh chương trình</p>
+        <div class="compare_block">
+          <div>
+            <div class="compare_course">
+              <img src="" />
+              <i class="fa-solid fa-circle-plus"></i>
+            </div>
+            <h3>Chương trình 1</h3>
+          </div>
+          <p class="compare_vs">Vs</p>
+          <div>
+            <div class="compare_course">
+              <img src="" />
+              <i class="fa-solid fa-circle-plus"></i>
+            </div>
+            <h3>Chương trình 2</h3>
+          </div>
+        </div>
+        <div class="compare_render">
+          <h4 class="main_clr">
+            <i class="fa-solid fa-graduation-cap"></i> Chọn 1 chương trình
+          </h4>
+          <div></div>
+        </div>
+        <div class="compare_active"></div>
+      </div>
+      <div class="compare_btn">
+        <i class="fa-solid fa-clone"></i> <span> So sánh </span>
+      </div>
+      <div class="test" id="test">
+        <div class="test_container">
+          <i class="fa-solid fa-xmark"></i>
+          <div class="test_head">
+            <img src="http://127.0.0.1:5500/ideas-02.png" />
+            <div>
+              <h5>Bạn phù hợp với chương trình nào?</h5>
+              <p>
+                Trả lời vài câu hỏi và IDEAS - AI sẽ gợi ý cho bạn chương trình
+                thật phù hợp!!!
+              </p>
+            </div>
+          </div>
+          <div class="test_inner">
+            <div class="test_result_wrapper"></div>
+            <div class="test_progress">
+              <div class="test_progress_inner"></div>
+            </div>
+            <div class="test_q"></div>
+            <div class="test_a"></div>
+          </div>
+          <div class="test_btns">
+            <p><i class="fa-solid fa-chevron-left"></i> Trở lại</p>
+            <p>Tiếp tục <i class="fa-solid fa-chevron-right"></i></p>
+          </div>
+        </div>
+      </div>
       <div class="ideas_popup_overlay"></div>
       <div class="ideas_footer">FOOTER</div>
     </main>
   </body>
+  <script src="./variable.js"></script>
   <script src="./main.js"></script>
 </html>

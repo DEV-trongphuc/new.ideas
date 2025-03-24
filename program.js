@@ -1,4 +1,79 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const h1 = document.querySelector("h1");
+  const program_avatar = document.querySelector(".program_avatar");
+  const program_school = document.querySelector(".program_school");
+  const program_tagline = document.querySelector(".program_tagline");
+  const program_description = document.querySelector(".program_description");
+  const ideas_highlight = document.querySelector("#ideas_highlight");
+  const ID = h1.dataset.program;
+  const PROGRAM = IDEAS_DATA.programmes[ID];
+  h1.textContent = PROGRAM.name;
+  program_avatar.src = IDEAS_DATA.school[PROGRAM.school].small_logo;
+  program_school.textContent = PROGRAM.school;
+  program_tagline.textContent = PROGRAM.tagline;
+  program_description.textContent = PROGRAM.description;
+  ideas_highlight.innerHTML = `
+   <div class="ideas_require_title" >
+            <i class="fa-solid fa-globe"></i>
+            <p>
+              <span>Hình thức</span>
+              <span>${PROGRAM.highlight[0]}</span>
+            </p>
+          </div>
+          <div class="ideas_require_title">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <p>
+              <span>Bằng cấp</span>
+           <span>${PROGRAM.highlight[1]}</span>
+            </p>
+          </div>
+          <div class="ideas_require_title">
+            <i class="fa-solid fa-clock"></i>
+            <p>
+              <span>Thời gian học với trường</span>
+             <span>${PROGRAM.highlight[2]}</span>
+            </p>
+          </div>
+          <div class="ideas_require_title">
+            <i class="fa-solid fa-briefcase"></i>
+            <p>
+              <span>Hỗ trợ IDEAS - Việt Nam</span>
+           <span>${PROGRAM.highlight[3]}</span>
+            </p>
+          </div>
+  
+  
+  
+  `;
+  const ideas_program_fee = document.querySelector(".ideas_program_fee");
+  ideas_program_fee.innerHTML = ""; // Xóa nội dung cũ
+
+  PROGRAM.fee_course.forEach((course) => {
+    const div = document.createElement("div");
+    div.className = "ideas_program_fee_item";
+    div.innerHTML = `
+    <img src="./icon_coner.png">
+    <div>
+      <div class="ideas_program_fee_head">
+        <img src="${course.icon}">
+        <h3>${course.name}</h3>
+        <h4>${course.price}</h4>
+      </div>
+      <ul>
+        ${course.benefits
+          .map(
+            (benefit) =>
+              `<li><i class="fa-solid fa-circle-check"></i> ${benefit}</li>`
+          )
+          .join("")}
+      </ul>
+    </div>
+    <div class="ideas_program_fee_btns">
+      <a class="main_btn"><i class="fa-solid fa-comment-dots"></i> Tư vấn</a>
+    </div>
+  `;
+    ideas_program_fee.appendChild(div);
+  });
   var swiper = new Swiper(".swiper-container", {
     slidesPerView: 5,
     spaceBetween: 10,
@@ -8,35 +83,42 @@ document.addEventListener("DOMContentLoaded", () => {
       disableOnInteraction: false,
     },
     speed: 5000,
+    observer: true,
+    observeParents: true,
+    breakpoints: {
+      1099: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+    },
   });
+  function updateSwiperSlides() {
+    if (window.innerWidth <= 1099) {
+      swiper.params.slidesPerView = 2;
+    } else {
+      swiper.params.slidesPerView = 5;
+    }
+    swiper.update(); // Cập nhật lại Swiper
+  }
+
+  window.addEventListener("resize", updateSwiperSlides);
+  updateSwiperSlides(); // Gọi 1 lần lúc đầu để setup đúng
+
   const view_tailieu = document.querySelector("#view_tailieu");
   const ideas_program_detail_info_lanhsu = document.querySelector(
     ".ideas_program_detail_info_lanhsu"
   );
   const view_thanhtoan = document.querySelector("#view_thanhtoan");
-  const ideas_alert = document.querySelector(".ideas_alert");
-  const ideas_media_popup = document.querySelector(".ideas_media_popup");
-  const ideas_alert_close = document.querySelectorAll(".ideas_alert_close");
-  ideas_alert_close.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".ideas_alert").forEach((alert) => {
-        ideas_alert.classList.remove("active");
-        ideas_media_popup.classList.remove("active");
-      });
-    });
-  });
-  const ideas_alert_title = document.querySelector(".ideas_alert h3");
-  const ideas_degree = document.querySelector(".ideas_degree");
-  ideas_degree.src = IDEAS_DATA.degree[0];
-  const ideas_media_popup_title = document.querySelector(
-    ".ideas_media_popup h3"
+  const ideas_program_number_subjects = document.querySelector(
+    ".ideas_program_number_subjects"
   );
-  const ideas_alert_content = document.querySelector(".ideas_alert_content");
-  const ideas_media_content = document.querySelector(".ideas_media_content");
-  view_tailieu.addEventListener("click", () => {
-    ideas_alert.classList.add("active");
+  ideas_program_number_subjects.innerHTML = PROGRAM.subjects;
 
-    const listItems = IDEAS_DATA.require
+  const ideas_degree = document.querySelector(".ideas_degree");
+  ideas_degree.src = PROGRAM.degree.front;
+
+  view_tailieu.addEventListener("click", () => {
+    const listItems = PROGRAM.require
       .map((item) => `<li><i class="fa-solid fa-check"></i> ${item}</li>`)
       .join("");
 
@@ -56,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!jobsContainer || !agesContainer) return;
 
-    jobsContainer.innerHTML = IDEAS_DATA.demographic.jobs
+    jobsContainer.innerHTML = PROGRAM.demographic.jobs
       .map(
         (job) => `
       <li>
@@ -72,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
       )
       .join("");
 
-    agesContainer.innerHTML = IDEAS_DATA.demographic.ages
+    agesContainer.innerHTML = PROGRAM.demographic.ages
       .map(
         (age) => `
       <li>
@@ -90,22 +172,33 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Gọi hàm để render
-  renderDemographic();
-  ideas_program_detail_info_lanhsu.addEventListener("click", () => {
-    ideas_media_popup.classList.add("active");
-    const content = `
-      <div>
-      <span><b>Mặt sau bằng tốt nghiệp</b></span>
-        <img src="${IDEAS_DATA.degree[1]}" />
-        <span><b>Mặt trước bằng tốt nghiệp</b></span>
-        <img src="${IDEAS_DATA.degree[0]}" />
-      </div>       
+  const container = document.querySelector(".ideas_imgs_logo.kiemdinh");
+  container.innerHTML = ""; // Xóa nội dung cũ (nếu cần)
+
+  PROGRAM.accreditation.forEach((item) => {
+    container.innerHTML += `
+      <a href="${item.link}">
+        <img src="${item.logo}" alt="${item.name}">
+      </a>
     `;
-    renderMedia("Chứng nhận hợp pháp hoá lãnh sự", content);
+  });
+
+  renderDemographic();
+  [ideas_program_detail_info_lanhsu, ideas_degree].forEach((element) => {
+    element.addEventListener("click", () => {
+      const content = `
+        <div>
+          <span><b>Mặt trước bằng tốt nghiệp</b></span>
+          <img src="${PROGRAM.degree.front}" />
+          <span><b>Mặt sau bằng tốt nghiệp</b></span>
+          <img src="${PROGRAM.degree.back}" />
+        </div>       
+      `;
+      renderMedia("Chứng nhận hợp pháp hoá lãnh sự", content);
+    });
   });
 
   view_thanhtoan.addEventListener("click", () => {
-    ideas_alert.classList.add("active");
     const content = `
       <img src="http://127.0.0.1:5500/icon2.png"/>
         <p><b>Thanh toán một lần hoặc chia thành hai lần</b></p>
@@ -118,22 +211,15 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     renderAlert("Thanh toán học phí EMBA UMEF", content);
   });
-  function renderAlert(title, content) {
-    ideas_alert_title.textContent = title;
-    ideas_alert_content.innerHTML = content;
-  }
-  function renderMedia(title, content) {
-    ideas_media_popup_title.textContent = title;
-    ideas_media_content.innerHTML = content;
-  }
+
   const ideasFaqInner = document.querySelector(".ideas_faq_inner");
-  ideasFaqInner.innerHTML = IDEAS_DATA.faq
+  ideasFaqInner.innerHTML = PROGRAM.faq
     .map(
       (item, index) => `
-    <div class="ideas_faq_item ${index === 0 ? "active" : ""}">
+     <div class="ideas_faq_item ${index === 0 ? "active" : ""}">
       <p>
         <span>${item.q}</span>
-        <span><i class="fa-solid fa-plus"></i></span>
+        <span><i class="fa-solid fa-angle-down"></i></span>
       </p>
       <span>${item.a}</span>
     </div>
@@ -168,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     container.innerHTML = ""; // Xóa nội dung cũ trước khi render
 
-    IDEAS_DATA.this_subjects.forEach((subject) => {
+    PROGRAM.this_subjects.forEach((subject) => {
       const li = document.createElement("li");
       const linkClass = subject.link ? "" : "disable";
       li.innerHTML = `
