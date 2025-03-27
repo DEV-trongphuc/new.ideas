@@ -1845,8 +1845,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (
       userAnswers[0] === 0 &&
       userAnswers[1] === 1 &&
-      userAnswers[2] === 0 &&
-      userAnswers[3] === 1 &&
+      userAnswers[2] === 1 &&
+      userAnswers[3] === 0 &&
       userAnswers[4] === 1
     ) {
       matchedPrograms = [IDEAS_DATA.programmes["IDEAS03"]];
