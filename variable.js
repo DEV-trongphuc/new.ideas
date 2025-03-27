@@ -1422,6 +1422,14 @@ const IDEAS_TEST = {
       ],
     },
     {
+      id: 2,
+      q: "Mục tiêu trong quản lý doanh nghiệp",
+      a: [
+        "Tôi muốn tìm hiểu về AI để áp dụng vào công việc",
+        "Tôi muốn tập trung vào quản lý và lãnh đạo chuyên sâu",
+      ],
+    },
+    {
       id: 3,
       q: "Bạn có định hướng học tiếp lên Tiến sĩ không?",
       a: [
@@ -1443,14 +1451,6 @@ const IDEAS_TEST = {
       a: [
         "Xem qua các video và tài liệu, hoàn thành bài tập theo quy định",
         "Muốn lớp học tương tác trực tiếp, được trao đổi và thảo luận cùng Giảng viên và học viên",
-      ],
-    },
-    {
-      id: 2,
-      q: "Mục tiêu trong quản lý doanh nghiệp",
-      a: [
-        "Tôi muốn tìm hiểu về AI để áp dụng vào công việc",
-        "Tôi muốn tập trung vào quản lý và lãnh đạo chuyên sâu",
       ],
     },
   ],
@@ -1817,36 +1817,41 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(userAnswers);
     let matchedPrograms = [IDEAS_DATA.programmes["IDEAS01"]];
     let type = "high";
-    if (userAnswers[3] === 0) {
-      type = "stand";
-      matchedPrograms = [
-        IDEAS_DATA.programmes["IDEAS01"],
-        IDEAS_DATA.programmes["IDEAS02"],
-        IDEAS_DATA.programmes["IDEAS03"],
-      ];
-    }
-    if (userAnswers[3] === 1 && userAnswers[0] === 0) {
-      type = "high";
-      matchedPrograms = [
-        IDEAS_DATA.programmes["IDEAS02"],
-        IDEAS_DATA.programmes["IDEAS03"],
-      ];
-    }
-    if (userAnswers[3] === 0 && userAnswers[0] === 1) {
+
+    if (userAnswers[4] === 0) {
       type = "stand";
       matchedPrograms = [
         IDEAS_DATA.programmes["IDEAS02"],
         IDEAS_DATA.programmes["IDEAS03"],
       ];
+
+      if (userAnswers[0] === 2) {
+        type = "high";
+        matchedPrograms = [IDEAS_DATA.programmes["IDEAS01"]];
+      }
     }
-    if (userAnswers[3] === 0 && userAnswers[0] === 2) {
-      type = "high";
-      matchedPrograms = [IDEAS_DATA.programmes["IDEAS01"]];
+
+    if (userAnswers[4] === 1 && userAnswers[0] === 0) {
+      matchedPrograms = [
+        IDEAS_DATA.programmes["IDEAS02"],
+        IDEAS_DATA.programmes["IDEAS03"],
+      ];
     }
-    if (userAnswers[4] === 0 && userAnswers[0] === 0) {
-      type = "high";
+
+    if (userAnswers[1] === 0 && userAnswers[0] === 0) {
       matchedPrograms = [IDEAS_DATA.programmes["IDEAS04"]];
     }
+
+    if (
+      userAnswers[0] === 0 &&
+      userAnswers[1] === 1 &&
+      userAnswers[2] === 0 &&
+      userAnswers[3] === 1 &&
+      userAnswers[4] === 1
+    ) {
+      matchedPrograms = [IDEAS_DATA.programmes["IDEAS03"]];
+    }
+
     testBackBtn.classList.add("disable");
     testInner.classList.add("show");
     test_result_wrapper.innerHTML = `
