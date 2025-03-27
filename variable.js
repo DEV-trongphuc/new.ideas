@@ -1824,11 +1824,6 @@ document.addEventListener("DOMContentLoaded", () => {
         IDEAS_DATA.programmes["IDEAS02"],
         IDEAS_DATA.programmes["IDEAS03"],
       ];
-
-      if (userAnswers[0] === 2) {
-        type = "high";
-        matchedPrograms = [IDEAS_DATA.programmes["IDEAS01"]];
-      }
     }
 
     if (userAnswers[4] === 1 && userAnswers[0] === 0) {
@@ -1850,6 +1845,10 @@ document.addEventListener("DOMContentLoaded", () => {
       userAnswers[4] === 1
     ) {
       matchedPrograms = [IDEAS_DATA.programmes["IDEAS03"]];
+    }
+    if (userAnswers[0] === 2) {
+      type = "high";
+      matchedPrograms = [IDEAS_DATA.programmes["IDEAS01"]];
     }
 
     testBackBtn.classList.add("disable");
