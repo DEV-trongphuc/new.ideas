@@ -44,7 +44,10 @@
         <div class="ideas_header_right">
           <ul class="ideas_menu">
             <li>
-              <a><i class="fa-solid fa-house"></i> Giới thiệu </a>
+              <a
+                ><i class="fa-solid fa-house"></i> Giới thiệu
+                <i class="fa-solid fa-angle-down"></i
+              ></a>
               <ul>
                 <li>
                   <a href="/dong-su-kien">Dòng sự kiện</a>
@@ -71,7 +74,10 @@
               </ul>
             </li>
             <li>
-              <a><i class="fa-solid fa-graduation-cap"></i> Chương trình</a>
+              <a
+                ><i class="fa-solid fa-graduation-cap"></i> Chương trình
+                <i class="fa-solid fa-angle-down"></i
+              ></a>
               <ul>
                 <li>
                   <a>Swiss UMEF <i class="fa-solid fa-caret-right"></i></a>
@@ -136,14 +142,20 @@
               </ul>
             </li>
             <li>
-              <a><i class="fa-solid fa-hand-holding-dollar"></i> Chính sách</a>
+              <a
+                ><i class="fa-solid fa-hand-holding-dollar"></i> Chính sách
+                <i class="fa-solid fa-angle-down"></i
+              ></a>
             </li>
             <li>
-              <a><i class="fa-solid fa-newspaper"></i> Bản tin</a>
+              <a
+                ><i class="fa-solid fa-newspaper"></i> Bản tin
+                <i class="fa-solid fa-angle-down"></i
+              ></a>
             </li>
           </ul>
           <div class="ideas_menu_btns">
-            <a class="main_btn"
+            <a class="main_btn" onclick="showform()"
               ><i class="fa-solid fa-headset"></i> <span>Tư vấn</span></a
             >
           </div>
@@ -153,9 +165,18 @@
     <main class="ideas_main">
       <div class="ideas_baner">
         <a href="#">
-          <img src="./baner_ideas.jpg" />
+          <img
+            src="./baner_ideas.jpg"
+            srcset="
+              ./iloveimg-compressed/banerideassq%20(1).jpg  880w,
+              ./baner_ideas.jpg                            1024w
+            "
+            sizes="(max-width: 880px) 100vw, 1024px"
+            alt="Banner Ideas"
+          />
         </a>
       </div>
+
       <div class="ideas_box space">
         <div class="w50">
           <img src="./ideas_paten.png" class="pattern" />
@@ -179,6 +200,12 @@
               nhận bằng Quốc tế vào buổi lễ tốt nghiệp (offline) tại trụ sở
               chính của trường mà bạn theo học: Hoa Kỳ, Thụy Sĩ, Pháp,…
             </li>
+            <li>
+              <i class="fa-solid fa-graduation-cap"></i> Toàn bộ chương trình
+              học, bằng cấp đều do các trường Quốc tế cấp trực tiếp và có Chứng
+              nhận hợp pháp hoá lãnh sự của Đại sứ quán Việt Nam ở quốc gia có
+              trụ sở chính của trường.
+            </li>
           </ul>
           <div class="ideas_follow_inner">
             <div class="ideas_follow">
@@ -191,6 +218,9 @@
               </a>
               <a target="_blank">
                 <i class="fa-brands fa-linkedin"></i>
+              </a>
+              <a target="_blank">
+                <i class="fa-brands fa-tiktok"></i>
               </a>
               <a target="_blank">
                 <i>
@@ -253,7 +283,47 @@
           </div>
         </div>
       </div>
-
+      <div class="swiper-container home">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img
+              src="./iloveimg-compressed/banerideassq (2).jpg"
+              alt="Image 1"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="./iloveimg-compressed/banerideassq (3).jpg"
+              alt="Image 1"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="./iloveimg-compressed/banerideassq (4).jpg"
+              alt="Image 1"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="./iloveimg-compressed/banerideassq (5).jpg"
+              alt="Image 1"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="./iloveimg-compressed/banerideassq (6).jpg"
+              alt="Image 1"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img src="./iloveimg-compressed/banerideassq.jpg" alt="Image 1" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./iloveimg-compressed/banerideassq2.jpg" alt="Image 1" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
       <div class="ideas_box">
         <div class="ideas_benefits">
           <h3>👍 Tại sao là chương trình Quốc Tế?</h3>
@@ -337,7 +407,10 @@
               </div>
             </div>
           </div>
-          <div class="ideas_courses_box"></div>
+          <h4 class="ideas_courses_tag mba">Cấp độ: MBA</h4>
+          <div class="ideas_courses_box mba"></div>
+          <h4 class="ideas_courses_tag dba mgt5">Cấp độ: DBA</h4>
+          <div class="ideas_courses_box dba"></div>
         </div>
       </div>
 
@@ -399,27 +472,47 @@
           <div class="ideas_coop">
             <h3 class="title_line">Đối tác học thuật</h3>
             <div class="ideas_coop_box school">
-              <a class="ideas_coop_item">
+              <a
+                class="ideas_coop_item"
+                href="https://www.swiss-umef.ch/"
+                target="_blank"
+              >
                 <img
                   src="https://ideas.edu.vn/wp-content/uploads/2023/07/Logo-Swiss-UMEF.webp"
                 />
               </a>
-              <a class="ideas_coop_item">
+              <a
+                class="ideas_coop_item"
+                href="https://www.collegedeparis.fr/"
+                target="_blank"
+              >
                 <img
                   src="https://www.collegedeparis.com/wp-content/uploads/2021/06/cdp-formation-continue.png"
                 />
               </a>
-              <a class="ideas_coop_item">
+              <a
+                class="ideas_coop_item"
+                href="https://www.ascencia-business-school.com/en/"
+                target="_blank"
+              >
                 <img
                   src="https://ideas.edu.vn/wp-content/uploads/2024/03/Logo-Ascencia-Business-School-1.png"
                 />
               </a>
-              <a class="ideas_coop_item">
+              <a
+                class="ideas_coop_item"
+                href="https://sbs.edu/"
+                target="_blank"
+              >
                 <img
                   src="https://ideas.edu.vn/wp-content/uploads/2024/11/SBS.png"
                 />
               </a>
-              <a class="ideas_coop_item">
+              <a
+                class="ideas_coop_item"
+                href="https://www.estiam.education/"
+                target="_blank"
+              >
                 <img
                   src="https://ideas.edu.vn/wp-content/uploads/2025/03/estiam.png"
                 />
@@ -429,29 +522,41 @@
           <div class="ideas_coop">
             <h3 class="title_line">Đối tác khoa học</h3>
             <div class="ideas_coop_box partner">
-              <a class="ideas_coop_item">
+              <a
+                class="ideas_coop_item"
+                href="https://chiefaiofficer.vn/"
+                target="_blank"
+              >
                 <img
                   src="https://chiefaiofficer.vn/wp-content/uploads/2024/09/cao-logo.png"
                 />
               </a>
-              <a class="ideas_coop_item">
+              <a
+                class="ideas_coop_item"
+                href="https://tssac.edu.vn/"
+                target="_blank"
+              >
                 <img
                   src="https://ideas.edu.vn/wp-content/uploads/2023/07/tssac-2.webp"
                 />
               </a>
-              <a class="ideas_coop_item">
+              <a class="ideas_coop_item" href="#" target="_blank">
                 <img
                   src="https://ideas.edu.vn/wp-content/uploads/2023/07/Untitled-design-1-e1657270193979.webp"
                 />
               </a>
-              <a class="ideas_coop_item">
+              <a class="ideas_coop_item" href="#" target="_blank">
                 <img
                   src="https://ideas.edu.vn/wp-content/uploads/2023/07/1646029406269.webp"
                 />
               </a>
-              <a class="ideas_coop_item">
+              <a
+                class="ideas_coop_item"
+                href="https://hcmusta.org.vn/"
+                target="_blank"
+              >
                 <img
-                  src="https://ideas.edu.vn/wp-content/uploads/2025/03/estiam.png"
+                  src="https://hcmusta.org.vn/wp-content/uploads/2022/10/Logo-LHH-300x300-1-324x235.jpeg"
                 />
               </a>
             </div>
@@ -496,12 +601,14 @@
         <div class="ideas_form_header">
           <h2><i class="fa-solid fa-headset"></i> Đăng ký tư vấn</h2>
           <div class="ideas_form_choose">
-            <span class="ideas_form_choose_text"> Executive MBA Online </span>
+            <span class="ideas_form_choose_text"> Tư vấn </span>
             <i class="fa-solid fa-sort-down"></i>
             <ul>
-              <li>MBA Online</li>
-              <li>EMBA Online</li>
+              <li>Online MBA</li>
+              <li>Executive MBA</li>
               <li>Global MBA</li>
+              <li>MSc AI</li>
+              <li>Online DBA</li>
               <li>Tư vấn chung</li>
             </ul>
           </div>
@@ -509,24 +616,30 @@
         <form>
           <label>
             <span><i class="fa-solid fa-signature"></i> Tên của bạn</span>
-            <input />
+            <input id="name" autocomplete="name" name="name" />
           </label>
           <div class="ideas_form_flex">
             <div>
               <span><i class="fa-solid fa-envelope"></i> Email</span>
-              <input />
+              <input id="email" autocomplete="email" name="email" />
             </div>
             <div>
               <span><i class="fa-solid fa-phone"></i> Số điện thoại</span>
-              <input />
+              <input id="phone" autocomplete="tel" name="phone" />
             </div>
           </div>
           <label>
-            <span><i class="fa-solid fa-certificate"></i> Bằng cấp</span>
-            <select>
-              <option>Cử nhân</option>
-              <option>Cao đẳng</option>
-              <option>Dưới cao đẳng</option>
+            <span
+              ><i class="fa-solid fa-certificate"></i> Bằng cấp hiện tại</span
+            >
+            <select id="degree">
+              <option value="" disabled selected hidden>
+                Bằng cấp hiện tại
+              </option>
+              <option value="Thạc sĩ">Thạc sĩ</option>
+              <option value="Cử nhân">Cử nhân</option>
+              <option value="Cao đẳng">Cao đẳng</option>
+              <option value="Dưới cao đẳng">Dưới cao đẳng</option>
             </select>
           </label>
           <label>
@@ -536,7 +649,7 @@
                 Chia sẽ về tiếng Anh, Kinh nghiệm và nhu cầu của bạn
               </span></span
             >
-            <textarea></textarea>
+            <textarea id="text_area"></textarea>
           </label>
           <a class="ideas_form_submit">Đăng ký tư vấn</a>
           <span class="ideas_submit_alert"
@@ -580,12 +693,12 @@
         <div class="test_container">
           <i class="fa-solid fa-xmark"></i>
           <div class="test_head">
-            <img src="http://127.0.0.1:5500/ideas-02.png" />
+            <img src="./ideas-02.png" />
             <div>
               <h5>Bạn phù hợp với chương trình nào?</h5>
               <p>
                 Trả lời vài câu hỏi và IDEAS - AI sẽ gợi ý cho bạn chương trình
-                thật phù hợp!!!
+                thật phù hợp!!! (Mini test áp dụng với MBA)
               </p>
             </div>
           </div>

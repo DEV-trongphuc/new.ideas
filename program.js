@@ -74,6 +74,16 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
     ideas_program_fee.appendChild(div);
   });
+  const swiperWrapper = document.getElementById("swiperWrapper");
+  PROGRAM.listImgs.forEach((imgSrc) => {
+    const slide = document.createElement("div");
+    slide.classList.add("swiper-slide");
+    const img = document.createElement("img");
+    img.src = imgSrc;
+    img.alt = "Image";
+    slide.appendChild(img);
+    swiperWrapper.appendChild(slide);
+  });
   var swiper = new Swiper(".swiper-container", {
     slidesPerView: 5,
     spaceBetween: 10,
@@ -248,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
       event.target.parentElement.classList.toggle("active");
     }
   });
+
   function renderSubjects() {
     const container = document.querySelector(".ideas_program_subject_item");
     if (!container) return;
@@ -256,7 +267,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     PROGRAM.this_subjects.forEach((subject) => {
       const li = document.createElement("li");
-      const linkClass = subject.link ? "" : "disable";
       li.innerHTML = `
       <p>
         <span>
@@ -264,11 +274,28 @@ document.addEventListener("DOMContentLoaded", () => {
         </span>
         <i class="fa-solid fa-chevron-down"></i>
       </p>
+    
       <p>
         <span>${subject.description || "Mô tả đang cập nhật..."}</span>
-        <a target="_blank" class="${linkClass}" href="${subject.link || "#"}">
-          <i class="fa-solid fa-circle-play"></i> Xem video
-        </a>
+       <span class="ideas_subject_btns">
+        ${
+          subject.link
+            ? `<a target="_blank" href="${subject.link}">
+                <i class="fa-solid fa-circle-play"></i> Xem video
+               </a>`
+            : `<a class="disable">
+                <i class="fa-solid fa-circle-play"></i> Xem video
+               </a>`
+        }
+         ${
+           subject.credit
+             ? `<a>
+         <i class="fa-solid fa-certificate"></i> ${subject.credit} tín chỉ
+       </a>`
+             : ""
+         } 
+       
+       </span>
       </p>
     `;
       container.appendChild(li);

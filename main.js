@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const ideas_follow_4 = document.querySelector(
     ".ideas_follow a:nth-of-type(4)"
   );
+  const ideas_follow_5 = document.querySelector(
+    ".ideas_follow a:nth-of-type(5)"
+  );
   const year_count = document.querySelector(".year_count");
   year_count.textContent = IDEAS_DATA.year_count;
   const students_count = document.querySelector(".students_count");
@@ -25,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
   ideas_follow_1.href = IDEAS_DATA.facebook_link;
   ideas_follow_2.href = IDEAS_DATA.youtube_link;
   ideas_follow_3.href = IDEAS_DATA.linkedin_link;
-  ideas_follow_4.href = IDEAS_DATA.zalo_link;
-
+  ideas_follow_5.href = IDEAS_DATA.zalo_link;
+  ideas_follow_4.href = IDEAS_DATA.tiktok_link;
   const historyInner = document.querySelector(".ideas_history_inner");
   if (historyInner && IDEAS_DATA.graduation_ceremony.length > 0) {
     IDEAS_DATA.graduation_ceremony.forEach((ceremony) => {
@@ -143,42 +146,88 @@ document.addEventListener("DOMContentLoaded", () => {
       quoteInner.innerHTML += quoteHTML;
     });
   }
-  const coursesBox = document.querySelector(".ideas_courses_box");
+  const coursesBox = document.querySelector(".ideas_courses_box.mba");
+  const coursesBoxDba = document.querySelector(".ideas_courses_box.dba");
 
   if (coursesBox) {
-    Object.values(IDEAS_DATA.programmes).forEach((course) => {
-      const courseHTML = `
-      <div class="ideas_course">
-        <img src="${course.avatar}" alt="${course.name}">
-        <div class="ideas_course_info">
-          <p>${course.name}</p>
-          <div class="ideas_school">
-            <a href="${IDEAS_DATA.school[course.school].link}" target="_blank">
-              <img src="${IDEAS_DATA.school[course.school].small_logo}">
-              <span>${course.school}</span>
-            </a>
-          </div>
-          <ul class="ideas_course_detail">
-            <li><i class="fa-solid fa-book"></i> ${course.subjects}</li>
-            <li><i class="fa-solid fa-clock"></i> ${course.duration}</li>
-            <li><i class="fa-solid fa-award"></i>  <b>${
-              course.fee_course[0].price
-            }</b></li>
-          </ul>
-          <div class="ideas_btns space_between">
-            <a onclick='showform("${
-              course.name
-            }")' class="sign_course"><i class="fa-solid fa-headset"></i> Tư vấn</a>
-            <a href="${
-              course.link
-            }" class="view_course"><i class="fa-solid fa-graduation-cap"></i> Chi tiết</a>
+    Object.values(IDEAS_DATA.programmes)
+      .filter((course) => course.level === "MBA") // Lọc chỉ lấy MBA
+      .forEach((course) => {
+        const courseHTML = `
+        <div class="ideas_course">
+          <img src="${course.avatar}" alt="${course.name}">
+          <div class="ideas_course_info">
+            <p>${course.name}</p>
+            <div class="ideas_school">
+              <a href="${
+                IDEAS_DATA.school[course.school].link
+              }" target="_blank">
+                <img src="${IDEAS_DATA.school[course.school].small_logo}">
+                <span>${course.school}</span>
+              </a>
+            </div>
+            <ul class="ideas_course_detail">
+              <li><i class="fa-solid fa-book"></i> ${course.subjects}</li>
+              <li><i class="fa-solid fa-clock"></i> ${course.duration}</li>
+              <li><i class="fa-solid fa-award"></i>  <b>${
+                course.fee_course[0].price
+              }</b></li>
+            </ul>
+            <div class="ideas_btns space_between">
+              <a onclick='showform("${course.name}")' class="sign_course">
+                <i class="fa-solid fa-headset"></i> Tư vấn
+              </a>
+              <a href="${course.link}" class="view_course">
+                <i class="fa-solid fa-graduation-cap"></i> Chi tiết
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    `;
-      coursesBox.innerHTML += courseHTML;
-    });
+      `;
+        coursesBox.innerHTML += courseHTML;
+      });
   }
+  if (coursesBoxDba) {
+    Object.values(IDEAS_DATA.programmes)
+      .filter((course) => course.level === "DBA") // Lọc chỉ lấy MBA
+      .forEach((course) => {
+        const courseHTML = `
+        <div class="ideas_course">
+          <img src="${course.avatar}" alt="${course.name}">
+          <div class="ideas_course_info">
+            <p>${course.name}</p>
+            <div class="ideas_school">
+              <a href="${
+                IDEAS_DATA.school[course.school].link
+              }" target="_blank">
+                <img src="${IDEAS_DATA.school[course.school].small_logo}">
+                <span>${course.school}</span>
+              </a>
+            </div>
+            <ul class="ideas_course_detail">
+              <li><i class="fa-solid fa-book"></i> ${course.subjects}</li>
+              <li><i class="fa-solid fa-clock"></i> ${course.duration}</li>
+              <li><i class="fa-solid fa-award"></i>  <b>${
+                course.fee_course[0].price
+              }</b></li>
+            </ul>
+            <div class="ideas_btns space_between">
+              <a onclick='showform("${course.name}")' class="sign_course">
+                <i class="fa-solid fa-headset"></i> Tư vấn
+              </a>
+              <a href="${
+                course.link
+              }" class="view_course" style="background: #b27a0d;">
+                <i class="fa-solid fa-graduation-cap"></i> Chi tiết
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+        coursesBoxDba.innerHTML += courseHTML;
+      });
+  }
+
   // document
   //   .querySelector(".ideas_form_submit")
   //   .addEventListener("click", function (event) {
@@ -218,4 +267,37 @@ document.addEventListener("DOMContentLoaded", () => {
   //     // Nếu muốn gửi form thật sự thì thay alert bằng:
   //     // document.querySelector("form").submit();
   //   });
+  var swiper = new Swiper(".swiper-container", {
+    spaceBetween: 8,
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    speed: 500,
+    observer: true,
+    observeParents: true,
+    pagination: {
+      el: ".swiper-pagination", // Chỉ định phần tử chứa dot
+      clickable: true, // Cho phép click vào dot để chuyển slide
+    },
+    breakpoints: {
+      1099: {
+        slidesPerView: 1,
+        spaceBetween: 5,
+      },
+    },
+  });
+
+  function updateSwiperSlides() {
+    if (window.innerWidth <= 1099) {
+      swiper.params.slidesPerView = 1;
+    } else {
+      swiper.params.slidesPerView = 3;
+    }
+    swiper.update();
+  }
+
+  window.addEventListener("resize", updateSwiperSlides);
+  updateSwiperSlides();
 });
